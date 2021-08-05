@@ -1,0 +1,211 @@
+Packages to Install:
+-------------------
+npm i -g nodemon	
+
+npm i express	
+
+npm i morgan	
+
+npm i cors helmet
+
+npm install mongoose
+
+npm i dotenv	
+
+npm i uuid
+
+npm i bcrypt
+
+npm i jsonwebtoken
+
+npm i multer
+
+npm i request
+
+API Profiles: (Note: All POST or PATCH body must be in form-data and NOT in raw JSON format)
+------------
+User:
+----
+GET
+http://localhost:3002/users/
+
+Result:
+{
+  "count": <Number>,
+  "users": [
+    {
+      "username": <String>,
+      "fullName": <String>,
+      "dateOfBirth": <Date> example("2012-11-04T14:51:06.157Z"),
+      "profilePicture": <String> example("http://localhost:3002/uploads\\FPP.jpeg"),
+      "jobTitle": <String>,
+      "rating": <Number>,
+      "skills": [],
+      "userEvents": [],
+      "request": {
+        "type": "GET",
+        "url": "http://localhost:3002/users/60f70e6e65fb545a60bd985e"
+      }
+    },
+  ]
+}
+
+GET
+http://localhost:3002/users/<userId>
+or
+http://localhost:3002/users/byUsername/<username>
+
+Result:
+{
+      "username": <String>,
+      "fullName": <String>,
+      "dateOfBirth": <Date> example("2012-11-04T14:51:06.157Z"),
+      "profilePicture": <String> example("http://localhost:3002/uploads\\FPP.jpeg"),
+      "jobTitle": <String>,
+      "rating": <Number>,
+      "skills": [],
+      "userEvents": [],
+      "request": {
+        "type": "GET",
+        "url": "http://localhost:3002/users/60f70e6e65fb545a60bd985e"
+      }
+}
+
+
+POST
+http://localhost:3002/users/
+
+Required Body:
+	      username: <String>,
+        password: <String>,
+        fullName: <String>,
+        dateOfBirth: <Date>,
+        jobTitle: <String>,//Optional
+        profilePicture: <JPEG/PNG File>,//Optional
+
+DELETE
+http://localhost:3002/users/<userId>
+
+Result:
+A message that the user was deleted
+
+PATCH
+http://localhost:3002/users/<userId>
+
+Required Body: (All fields are optional)
+	username: <String>,
+        password: <String>,
+        fullName: <String>,
+        jobTitle: <String>,
+        dateOfBirth: <Date>,
+        profilePicture: <JPEG/PNG File>,
+        rating: <number>
+
+Events:
+------
+POST
+http://localhost:3002/events/
+
+Required Body
+	name: <String>,
+        dateOfEvent: <Date>,
+        location: <String>,
+        hostId: <ObjectId>,
+        completed: <Boolean>,
+        category: <ObjectId>,
+        inviteType: <String>,
+        picture: <JPEG/PNG File> //Optional
+	requirements: [ skill: <String>, skill: <String>]
+	materials: [ {item: <String>, count: <Number>},{item: <String>, count: <Number>}]
+
+GET
+http://localhost:3002/events/
+
+Result:
+{
+  "count": <Number>,
+  "events": [
+    {
+      "name": <String>,
+      "dateOfEvent": <Date>,
+      "location": <String>,
+      "hostId": <ObjectId>,
+      "completed": <Boolean>,
+      "requirements": [<String>,<String>],
+      "materials": [{item: <String>, count: <Number>}],
+      "picture": <String>,
+      "request": {
+        "type": "GET",
+        "url": "http://localhost:3002/events/60f70ea865fb545a60bd985f"
+      }
+    }
+  ]
+}
+
+GET
+http://localhost:3002/events/<eventId>
+Or
+http://localhost:3002/events/byName/<name>
+
+Result:
+{
+      "name": <String>,
+      "dateOfEvent": <Date>,
+      "location": <String>,
+      "hostId": <ObjectId>,
+      "completed": <Boolean>,
+      "requirements": [<String>,<String>],
+      "materials": [{item: <String>, count: <Number>}],
+      "picture": <String>,
+}
+
+GET
+http://localhost:3002/events/byHostId/<userId>
+
+Result
+[{
+      "name": <String>,
+      "dateOfEvent": <Date>,
+      "location": <String>,
+      "hostId": <ObjectId>,
+      "completed": <Boolean>,
+      "requirements": [<String>,<String>],
+      "materials": [{item: <String>, count: <Number>}],
+      "picture": <String>,
+}]
+
+DELETE
+http://localhost:3002/events/<eventId>
+
+Result:
+Message Saying Event was deleted
+
+PATCH
+http://localhost:3002/events/<eventId>
+Required Body:
+ 	name: req.body.name,
+       	name: <String>,
+        dateOfEvent: <Date>,
+        location: <String>,
+        hostId: <ObjectId>,
+        completed: <Boolean>,
+        category: <ObjectId>,
+        inviteType: <String>,
+        picture: <JPEG/PNG File> //Optional
+	requirements: [ skill: <String>, skill: <String>]
+	materials: [ {item: <String>, count: <Number>},{item: <String>, count: <Number>}]
+
+PATCH
+http://localhost:3002/events/byName/<name>
+
+Required Body:
+	name: <String>,
+        dateOfEvent: <Date>,
+        location: <String>,
+        hostId: <ObjectId>,
+        completed: <Boolean>,
+        category: <ObjectId>,
+        inviteType: <String>,
+        picture: <JPEG/PNG File> //Optional
+	
+	
